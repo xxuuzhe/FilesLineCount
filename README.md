@@ -1,2 +1,2 @@
 # FilesLineCount
-Count All Files' Line
+Count all of lines in the folder
