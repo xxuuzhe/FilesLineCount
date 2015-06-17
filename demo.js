@@ -1,32 +1,53 @@
+/*param dic 需要查找的目录
+ *
+ *
+ *return lines
+ *return files
+ *return directory
+ *return filters
+*/
 var fs = require('fs')
 var path = require('path')
-var filesCount = [];
-var filters = ['.js','.html','.css','.tpl']
-var num = 0;
-countFiles('./')
+
+var filters = ['.js','.html','.css','.tpl','.jpg']
+var num = 0,
+    files = [],
+    directory = [];
+
 function countFiles(dic){
+    count(dic);
     function count(pathWay){
-        var files = fs.readdirSync(pathWay);
-        files.forEach(function(name){
-            var tmpPath = pathWay +"/"+name
+        var aFiles = fs.readdirSync(pathWay);
+        aFiles.forEach(function(fileName){
+            var tmpPath = (pathWay +"/"+fileName).replace(/(\/)+/g,"/");
             var tmpFile = fs.statSync(tmpPath)
             if(tmpFile.isDirectory()){
-                count(tmpPath)
+                directory.push(tmpPath);
+                count(tmpPath);
             }else{
-                if(filters.indexOf(path.extname(name)) >- 1 ){
-                    filesCount.push(tmpPath)
+                if(filters.indexOf(path.extname(fileName)) >- 1 ){
+                    files.push(tmpPath)
                 }
             }
         })
     }
 
-    filesCount.forEach(function(file){
-
+    files.forEach(function(file){
         var data = fs.readFileSync(file,'utf8')
         var str = data.toString('utf8')
         var res = str.match(/\r\n|\n\r|\r|\n/g)
         if(res)num+=res.length;
-    })
+    });
 
+<<<<<<< HEAD
     console.log(num);
+=======
+    return {
+        "lines":num,
+        "files":files,
+        "directory":directory,
+        "filters":filters
+    }
+>>>>>>> 08912d13f65458c77373fe88a1611a288bae1f5e
 }
+console.log(countFiles("/Users/David/Desktop/"))
