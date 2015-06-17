@@ -28,5 +28,5 @@ function countFiles(dic){
         if(res)num+=res.length;
     })
 
-    console.log(num)
+    console.log(num);
 }
