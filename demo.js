@@ -1,5 +1,5 @@
 /*param dic 需要查找的目录
- *
+ *11111
  *
  *return lines
  *return files
@@ -31,23 +31,18 @@ function countFiles(dic){
             }
         })
     }
-
     files.forEach(function(file){
         var data = fs.readFileSync(file,'utf8')
         var str = data.toString('utf8')
         var res = str.match(/\r\n|\n\r|\r|\n/g)
         if(res)num+=res.length;
     });
-
-<<<<<<< HEAD
-    console.log(num);
-=======
     return {
         "lines":num,
         "files":files,
         "directory":directory,
         "filters":filters
     }
->>>>>>> 08912d13f65458c77373fe88a1611a288bae1f5e
+
 }
 console.log(countFiles("/Users/David/Desktop/"))
