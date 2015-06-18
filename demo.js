@@ -1,5 +1,4 @@
 /*param dic 需要查找的目录
- *11111
  *
  *return lines
  *return files
